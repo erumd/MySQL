@@ -1,19 +1,18 @@
-INSERT INTO department ("name")
+INSERT INTO department (name)
 VALUES 
 ("Human Resources"),
 ("Engineering"),
 ("Sales")
 ;
 
-
 INSERT INTO role (title, salary, department_id)
-values
+VALUES
 ("HR Employee", 70000.99, 1),
 ("Back End Developer", 100000.99, 2),
-("Front End Developer" 90000.99, 2),
+("Front End Developer", 90000.99, 2),
 ("Sale Team", 60000, 3)
 
-INSERT INTO manager (first_name,last_name)
+INSERT INTO manager (first_name, last_name)
 VALUES
 ("Tom", "Jerry"),
 ("Sponge", "Bob"),
