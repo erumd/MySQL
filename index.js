@@ -27,7 +27,7 @@ function whatToDo() {
           "View All Employees",
           "Add Role",
           "Add Department",
-          "Add Employee",
+          "Add Employees",
           "Update Role",
           "Done",
         ],
@@ -93,42 +93,62 @@ function viewEmployee() {
 // const viewEmployee = () => {};
 
 async function addEmployee() {
-  const queryAddEmployee = "SELECT * FROM role";
-  connection.query(queryAddEmployee, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-  });
+  //   const queryAddEmployee = "SELECT * FROM role";
+  //   connection.query(queryAddEmployee, (err, res) => {
+  //     if (err) throw err;
+  //     console.table(res);
+  //   });
 
-  await inquirer.prompt([
-    {
-      name: "first_name",
-      message: "Add Employee's first name",
-      type: "input",
-    },
-    {
-      name: "last_name",
-      message: "Add Employee's last name",
-      type: "input",
-    },
-    {
-      name: "role",
-      message: "Add Employee's role",
-      type: "list",
-      choices: [
-        "HR Employee",
-        "Back End Developer",
-        "Front End Developer",
-        "Sale Team",
-      ],
-    },
-    {
-      name: "manager",
-      message: "Add Employee's Manager",
-      type: "list",
-      choices: ["Tom Jerry", "Sponge Bob", "Eliza Thornberry", "Patrick Star"],
-    },
-  ]);
+  await inquirer
+    .prompt([
+      {
+        name: "first_name",
+        message: "Add Employee's first name",
+        type: "input",
+      },
+      {
+        name: "last_name",
+        message: "Add Employee's last name",
+        type: "input",
+      },
+      {
+        name: "role",
+        message: "Add Employee's role",
+        type: "list",
+        choices: [
+          "HR Employee",
+          "Back End Developer",
+          "Front End Developer",
+          "Sale Team",
+        ],
+      },
+      {
+        name: "manager",
+        message: "Add Employee's Manager",
+        type: "list",
+        choices: [
+          "Tom Jerry",
+          "Sponge Bob",
+          "Eliza Thornberry",
+          "Patrick Star",
+        ],
+      },
+    ])
+    .then(answers);
+  const queryAddEmployee =
+    "INSERT INTO role (first_name, last_name, role, manager) VALUES (?,?,?, ?)";
+  connection.query(
+    queryAddEmployee,
+    [answers.first_name, answers.last_name, answers.role, answers.manager],
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      //   });
+    }
+  );
 }
+
+// _____________________________________________________________________________________________________
 //Will helped
 //trying WITHOUT ASYNCH AND WAIT
 function addDepartment() {
@@ -156,6 +176,8 @@ function addDepartment() {
       });
     });
 }
+
+// ________________________________________________________________________________________________
 
 async function addRole() {
   //   const queryAddRole = "SELECT * FROM department";
@@ -200,7 +222,7 @@ async function addRole() {
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
         queryAddRole,
-        [answers.title, answers.salary, answers.department], //no answers.department_id
+        [answers.title, answers.salary, answers.department], //not working [answers.department_id]
         (err, res) => {
           if (err) throw err;
           console.table(res);
