@@ -46,16 +46,17 @@ function whatToDo() {
         whatToDo();
       } else if (answers.main === "Add Employees") {
         addEmployee();
-        whatToDo();
+        // addEmployeeQuestions();
+        // whatToDo(); DONT NEED TO CALL IT AGAIN
       } else if (answers.main === "Add Department") {
         addDepartment;
-        whatToDo();
+        // whatToDo();
       } else if (answers.main === "Add Role") {
         addRole;
-        whatToDo();
+        // whatToDo();
       } else if (answers.main === "Update Role") {
         updateRole;
-        whatToDo();
+        // whatToDo();
       }
     });
 }
@@ -91,13 +92,55 @@ function viewEmployee() {
 
 // const viewEmployee = () => {};
 
-function addEmployee () {
+async function addEmployee() {
+  const queryAddEmployee = "SELECT * FROM role";
+  connection.query(queryAddEmployee, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+
+  await inquirer.prompt([
+    {
+      name: "first_name",
+      message: "Add Employee's first name",
+      type: "input",
+    },
+    {
+      name: "last_name",
+      message: "Add Employee's last name",
+      type: "input",
+    },
+    {
+      name: "role",
+      message: "Add Employee's role",
+      type: "list",
+      choices: [
+        "HR Employee",
+        "Back End Developer",
+        "Front End Developer",
+        "Sale Team",
+      ],
+    },
+    {
+      name: "manager",
+      message: "Add Employee's Manager",
+      type: "list",
+      choices: ["Tom Jerry", "Sponge Bob", "Eliza Thornberry", "Patrick Star"],
+    },
+  ]);
+}
+
+async function addDepartment() {
+  const queryAddDepartment = "INSERT INTO role (column names ) VALUES (?,?,?)"; //W3 Schools
+  connection.query(queryAddDepartment, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+}
+
+async function addRole() {
     
-};
-
-const addDepartment = () => {};
-
-const addRole = () => {};
+}
 
 const updateRole = () => {};
 
