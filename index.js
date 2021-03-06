@@ -200,7 +200,7 @@ async function addRole() {
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
         queryAddRole,
-        [answers.title, answers.salary, answers.department_id],
+        [answers.title, answers.salary, answers.department], //no answers.department_id
         (err, res) => {
           if (err) throw err;
           console.table(res);
@@ -239,7 +239,7 @@ async function updateRole() {
       const queryAddRole = "UPDATE role SET  WHERE";
       connection.query(
         queryAddRole,
-        [answers.title, answers.salary, answers.department_id],
+        [answers.title, answers.salary, answers.department], //no answers.department_id
         (err, res) => {
           if (err) throw err;
           console.table(res);
