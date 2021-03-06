@@ -131,15 +131,48 @@ async function addEmployee() {
 }
 
 async function addDepartment() {
-  const queryAddDepartment = "INSERT INTO role (column names ) VALUES (?,?,?)"; //W3 Schools
+  const queryAddDepartment =
+    "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)"; //W3 Schools
   connection.query(queryAddDepartment, (err, res) => {
     if (err) throw err;
     console.table(res);
   });
+
+  await inquirer.prompt([
+    {
+      name: "department",
+      message: "Add department",
+      type: "list",
+      choices: ["Human Resources", "Engineering", "Sales"],
+    },
+  ]);
 }
 
 async function addRole() {
-    
+  const queryAddRole = "SELECT * FROM department";
+  connection.query(queryAddRole, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+
+  await inquirer.prompt([
+    {
+      name: "title",
+      message: "Name of Role?",
+      type: "input",
+    },
+    {
+      name: "salary",
+      message: "Salary for role selected",
+      type: "input",
+    },
+    {
+      name: "department",
+      message: "Department for role?",
+      type: "choices",
+      choices: ["Human Resources", "Engineering", "Sales"],
+    },
+  ]);
 }
 
 const updateRole = () => {};
