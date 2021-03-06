@@ -1,10 +1,10 @@
-const role = require("/.index");
+// const role = require("/.index");
 
 const questions = [
   {
     type: "list",
     name: "main",
-    message: "What do you want to do?",
+    message: "Pick one",
     choices: [
       "Add role",
       "Add department",
@@ -45,20 +45,20 @@ const employee = [
     message: "Employee's last name?",
   },
   {
-    type: "input",
-    name: "last_name",
+    type: "list",
+    name: "role",
     message: "Employee's Role?",
     choices: ["Manager", "Intern", "Engineer", "HR", "Sales"],
   },
   {
-    type: "input",
+    type: "list",
     name: "Manager",
     message: "Employee's Manager?",
     choices: ["Tome Jerry", "Sponge Bob", "Eliz Thornberry", "Patrick Star"],
   },
 ];
 
-//not sure if did this correctly 
+//not sure if did this correctly
 module.export = {
   questions: questions,
   department: department,

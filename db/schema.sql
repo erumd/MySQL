@@ -39,7 +39,7 @@ foreign key (manager_id) references manager (id),
 primary key (id) 
 );
 
-SELECT * FROM team_db
+
 
 
 

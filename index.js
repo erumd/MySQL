@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 });
 
 //class activity Great Bay
-const questions = () => {
+function whatToDo() {
   inquirer
     .prompt([
       {
@@ -22,55 +22,121 @@ const questions = () => {
         name: "main",
         message: "What do you want to do?",
         choices: [
-          "Add role",
-          "Add department",
-          "Add employee",
-          "View department",
-          "View role",
+          "Add Role",
+          "Add Department",
+          "Add Employee",
+          "View Department",
+          "View Role",
           "View Employees",
           "Update Role",
+          "Done",
         ],
-        // validate(value) {
-        //     if (isNaN(value) === false) {
-        //       return true;
-        //     }
-        //     return false;
-        //   },
       },
     ])
-    .then((answer) => {
-      // when finished prompting, insert a new item into the db with that info
-      connection.query(
-        "INSERT INTO table?",
-        // QUESTION: What does the || 0 do?
-        {
-          item_name: answer.item,
-          category: answer.category,
-          starting_bid: answer.startingBid || 0,
-          highest_bid: answer.startingBid || 0,
-        },
-        (err) => {
-          if (err) throw err;
-          console.log("Your item was created successfully!");
-          // re-prompt the user for if they want to bid or post
-          start();
-        }
-      );
+
+    .then((answers) => {
+      if (answers.main === "View Department") {
+        viewDepartment();
+        whatToDo();
+      } else if (answers.main === "View Role") {
+        viewRole();
+        whatToDo();
+      } else if (answers.main === "View Employees") {
+        viewEmployee();
+        whatToDo();
+      } else if (answers.main === "Add Employees") {
+        addEmployee();
+        whatToDo();
+      } else if (answers.main === "Add Department") {
+        addDepartment;
+        whatToDo();
+      } else if (answers.main === "Add Role") {
+        addRole;
+        whatToDo();
+      } else if (answers.main === "Update Role") {
+        updateRole;
+        whatToDo();
+      }
     });
+}
+
+whatToDo(); //have to call, duh!
+
+console.log("What to do function works", whatToDo);
+
+function viewDepartment() {
+  const queryDepartment = "SELECT * FROM department";
+  connection.query(queryDepartment, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+}
+
+// const viewRole = () => {};
+function viewRole() {
+  const queryRole = "SELECT * FROM role";
+  connection.query(queryRole, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+}
+
+function viewEmployee() {
+  const queryEmployee = "SELECT * FROM employee";
+  connection.query(queryEmployee, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+}
+
+// const viewEmployee = () => {};
+
+function addEmployee () {
+    
 };
-const viewDepartment = () => {};
-
-const viewRole = () => {};
-
-const viewEmployees = () => {};
-
-const addEmployee = () => {};
 
 const addDepartment = () => {};
 
 const addRole = () => {};
 
 const updateRole = () => {};
+
+//tried to do switch statement
+// .then((answer) => {
+//   switch (answer.action) {
+//     case "View Department":
+//       viewDepartment();
+//       break;
+
+//     case "View Role":
+//       viewRole();
+//       break;
+
+//     case "View Employees":
+//       viewEmployees();
+//       break;
+
+//     case "Add Role":
+//       addRole();
+//       break;
+
+//     case "Add Department":
+//       addDepartment();
+//       break;
+
+//     case "Add Employee":
+//       addEmployee();
+//       break;
+
+//     case "Update Roles":
+//       updateRoles();
+//       break;
+
+//     case "Done":
+//       connection.end();
+//       break;
+//   }
+// });
 
 //   ANOTHER CLASS ACTIVITY
 //   const questions = () => {
