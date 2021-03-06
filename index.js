@@ -136,7 +136,7 @@ async function addEmployee() {
     ])
     .then(answers);
   const queryAddEmployee =
-    "INSERT INTO role (first_name, last_name, role, manager) VALUES (?,?,?, ?)";
+    "INSERT INTO role (first_name, last_name, role, manager) VALUES (?,?,?,?)";
   connection.query(
     queryAddEmployee,
     [answers.first_name, answers.last_name, answers.role, answers.manager],
