@@ -22,12 +22,12 @@ function whatToDo() {
         name: "main",
         message: "What do you want to do?",
         choices: [
+          "View All Department",
+          "View All Role",
+          "View All Employees",
           "Add Role",
           "Add Department",
           "Add Employee",
-          "View Department",
-          "View Role",
-          "View Employees",
           "Update Role",
           "Done",
         ],
@@ -35,13 +35,13 @@ function whatToDo() {
     ])
 
     .then((answers) => {
-      if (answers.main === "View Department") {
+      if (answers.main === "View All Department") {
         viewDepartment();
         whatToDo();
-      } else if (answers.main === "View Role") {
+      } else if (answers.main === "View All Role") {
         viewRole();
         whatToDo();
-      } else if (answers.main === "View Employees") {
+      } else if (answers.main === "View All Employees") {
         viewEmployee();
         whatToDo();
       } else if (answers.main === "Add Employees") {
