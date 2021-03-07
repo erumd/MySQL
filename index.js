@@ -97,6 +97,17 @@ function viewEmployee() {
 // const viewEmployee = () => {};
 
 async function addEmployee() {
+  // const inputDepartment = [];
+  // const queryAddEmployee = "SELECT * FROM manager";
+  // connection.query(queryAddEmployee, (err, res) => {
+  //   if (err) throw err;
+  //   // console.table(res);
+
+  //   //   add loop
+  //   for (let i = 0; i < res.length; i++) {
+  //     inputDepartment.push(res[i].name);
+  //   }
+  // });
   //   const queryAddEmployee = "SELECT * FROM role";
   //   connection.query(queryAddEmployee, (err, res) => {
   //     if (err) throw err;
@@ -199,8 +210,6 @@ async function addDepartment() {
         });
         //   }
         console.table(queryDepartmentTable);
-
-        return whatToDo();
       });
     });
 }
@@ -233,9 +242,9 @@ async function addRole() {
     // console.table(res);
 
     //   add loop
-    for (let i = 0; i < res.length; i++) {
-      inputDepartment.push(res[i].name);
-    }
+    // for (let i = 0; i < res.length; i++) {
+    //   inputDepartment.push(res[i].name);
+    // }
   });
 
   await inquirer
