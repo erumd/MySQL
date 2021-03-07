@@ -183,10 +183,22 @@ async function addDepartment() {
       const queryAddDepartment = "INSERT INTO department (name) VALUES (?)"; //W3 Schools
       connection.query(queryAddDepartment, [answers.department], (err, res) => {
         if (err) throw err;
-        console.table(res);
+        // console.table(res);
+
+        // function addDepartmentTable() {
+        const queryDepartmentTable = "SELECT * FROM department";
+        connection.query(queryDepartmentTable, (err, res) => {
+          if (err) throw err;
+          console.table(res);
+        });
+        //   }
+        // console.table(queryDepartmentTable);
       });
     });
 }
+
+//tryin to add query to generate dep table
+
 // ________________________________________________________________________________________________
 
 async function addRole() {
