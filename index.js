@@ -208,20 +208,35 @@ async function addDepartment() {
 //tryin to add query to generate dep table
 
 // ________________________________________________________________________________________________
+// 1. query the db for the departments table (select * )
+
+// 2. In the promise for the query create a new array of objects that have a "name" and "value"
+// New
+
+// the name will be the department name
+
+// value will be the id
+
+// 3. in your followup inquirer questions use that array for the choices on the question for departments
+
+// this will make it so that the choices shown are the department names
+
+// but the actual value is the departments id
+
+// 4. perform the query to add the new role
 
 async function addRole() {
-  "SELECT * FROM department";
+  const queryAddRole = "SELECT * FROM department";
+  connection.query(queryAddRole, (err, res) => {
+    if (err) throw err;
+    console.table(res);
 
-  //   const queryAddRole = "SELECT * FROM department";
-  //   connection.query(queryAddRole, (err, res) => {
-  //     if (err) throw err;
-  //     console.table(res);
-
-  //add loop
-  //   const inputDepartment = [];
-  //   for (let i = 0; i < res.length; i++) {
-  //     inputDepartment.push(res[i].name);
-  //   }
+    //   add loop
+    const inputDepartment = [];
+    for (let i = 0; i < res.length; i++) {
+      inputDepartment.push(res[i].name);
+    }
+  });
 
   await inquirer
     .prompt([
@@ -239,14 +254,17 @@ async function addRole() {
         name: "department",
         message: "Department to add new role?",
         type: "list",
-        choices: ["Human Resources", "Engineering", "Sales"],
+        // choices: ["Human Resources", "Engineering", "Sales"],
+        choices: [inputDepartment],
       },
     ])
     .then((answers) => {
-      const queryAddRole =
+
+        
+      const queryAddRole2 =
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
-        queryAddRole,
+        queryAddRole2,
         [answers.title, answers.salary, answers.department_id],
         (err, res) => {
           if (err) throw err;
