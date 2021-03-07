@@ -226,13 +226,13 @@ async function addDepartment() {
 // 4. perform the query to add the new role
 
 async function addRole() {
+  const inputDepartment = [];
   const queryAddRole = "SELECT * FROM department";
   connection.query(queryAddRole, (err, res) => {
     if (err) throw err;
-    console.table(res);
+    // console.table(res);
 
     //   add loop
-    const inputDepartment = [];
     for (let i = 0; i < res.length; i++) {
       inputDepartment.push(res[i].name);
     }
@@ -259,8 +259,6 @@ async function addRole() {
       },
     ])
     .then((answers) => {
-
-        
       const queryAddRole2 =
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
