@@ -214,6 +214,7 @@ async function addDepartment() {
           });
           //   }
           console.table(queryDepartmentTable);
+          whatToDo();
         }
       );
     });
