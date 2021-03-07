@@ -54,7 +54,7 @@ function whatToDo() {
         // whatToDo();
       } else if (answers.main === "Add Role") {
         addRole();
-        inputDepartment();
+        // inputDepartment();
         // whatToDo();
       } else if (answers.main === "Update Role") {
         updateRole();
@@ -192,7 +192,7 @@ async function addDepartment() {
           console.table(res);
         });
         //   }
-        // console.table(queryDepartmentTable);
+        console.table(queryDepartmentTable);
       });
     });
 }
@@ -208,10 +208,10 @@ async function addRole() {
   //     console.table(res);
 
   //add loop
-  const inputDepartment = [];
-  for (let i = 0; i < res.length; i++) {
-    inputDepartment.push(res[i].name);
-  }
+  //   const inputDepartment = [];
+  //   for (let i = 0; i < res.length; i++) {
+  //     inputDepartment.push(res[i].name);
+  //   }
 
   await inquirer
     .prompt([
@@ -240,7 +240,13 @@ async function addRole() {
         [answers.title, answers.salary, answers.department_id], //not working [answers.department_id]
         (err, res) => {
           if (err) throw err;
-          console.table(res);
+          //   console.table(res);
+
+          const queryRoleTable = "SELECT * FROM role";
+          connection.query(queryRoleTable, (err, res) => {
+            if (err) throw err;
+            console.table(res);
+          });
         }
       );
     });
