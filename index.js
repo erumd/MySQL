@@ -1,4 +1,5 @@
 //used SQL activities from class
+//DID study group and got help from Will, Jasmine, amd Gregory
 
 const { questions, department, role, employee } = require("./questions"); //not sure if I did this part right
 require("dotenv").config();
@@ -53,10 +54,13 @@ function whatToDo() {
         // whatToDo();
       } else if (answers.main === "Add Role") {
         addRole();
+        inputDepartment();
         // whatToDo();
       } else if (answers.main === "Update Role") {
         updateRole();
         // whatToDo();
+      } else if (answers.main === "Done") {
+        connection.end();
       }
     });
 }
@@ -134,24 +138,32 @@ async function addEmployee() {
         ],
       },
     ])
-    .then(answers);
-  const queryAddEmployee =
-    "INSERT INTO role (first_name, last_name, role, manager) VALUES (?,?,?,?)";
-  connection.query(
-    queryAddEmployee,
-    [answers.first_name, answers.last_name, answers.role, answers.manager],
-    (err, res) => {
-      if (err) throw err;
-      console.table(res);
-      //   });
-    }
-  );
+    .then((answers) => {
+      const queryAddEmployee =
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+      connection.query(
+        queryAddEmployee,
+        [
+          answers.first_name,
+          answers.last_name,
+          answers.role_id,
+          answers.manager_id,
+        ],
+        (err, res) => {
+          if (err) throw err;
+          console.log(answers);
+          console.table(res);
+        }
+
+        //take in role_id nad manger_id and output number
+      );
+    });
 }
 
 // _____________________________________________________________________________________________________
 //Will helped
 //trying WITHOUT ASYNCH AND WAIT
-function addDepartment() {
+async function addDepartment() {
   //   const queryAddDepartment =
   // "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)"; //W3 Schools
   //   connection.query(queryAddDepartment, [title, salary, department_id,],(err, res) => {
@@ -159,13 +171,12 @@ function addDepartment() {
   //       console.table(res);
   //     }
   //   );
-  inquirer
+  await inquirer
     .prompt([
       {
         name: "department",
-        message: "Add department",
-        type: "list",
-        choices: ["Human Resources", "Engineering", "Sales"],
+        message: "Which department you want to add?",
+        type: "input",
       },
     ])
     .then((answers) => {
@@ -176,7 +187,6 @@ function addDepartment() {
       });
     });
 }
-
 // ________________________________________________________________________________________________
 
 async function addRole() {
@@ -186,33 +196,26 @@ async function addRole() {
   //     console.table(res);
 
   //add loop
-  // var department = [];
-  // for (let i = 0; i < res.length; i++) {
-  //   department.push(res[i].name);
-  // }
-  //   });
+  const inputDepartment = [];
+  for (let i = 0; i < res.length; i++) {
+    inputDepartment.push(res[i].name);
+  }
 
   await inquirer
     .prompt([
       {
         name: "title",
-        message: "Name of Role?",
-        type: "list",
-        choices: [
-          "HR Employee",
-          "Back End Developer",
-          "Front End Developer",
-          "Sale Team",
-        ],
+        message: "Which new role do you want to add?",
+        type: "input",
       },
       {
         name: "salary",
-        message: "Salary for role selected",
+        message: "Salary for new role selected",
         type: "input",
       },
       {
         name: "department",
-        message: "Department for role?",
+        message: "Department to add new role?",
         type: "list",
         choices: ["Human Resources", "Engineering", "Sales"],
       },
@@ -222,7 +225,7 @@ async function addRole() {
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
         queryAddRole,
-        [answers.title, answers.salary, answers.department], //not working [answers.department_id]
+        [answers.title, answers.salary, answers.department_id], //not working [answers.department_id]
         (err, res) => {
           if (err) throw err;
           console.table(res);
@@ -230,7 +233,7 @@ async function addRole() {
       );
     });
 }
-
+// __________________________________________________________________________ UPDATE ROLE
 async function updateRole() {
   await inquirer
     .prompt([
@@ -245,11 +248,11 @@ async function updateRole() {
           "Sale Team",
         ],
       },
-      {
-        name: "salary",
-        message: "Salary for role selected",
-        type: "input",
-      },
+      //   { I DON'T THINK NEED TO UPDATE SALARY
+      //     name: "salary",
+      //     message: "Salary for role selected",
+      //     type: "input",
+      //   },
       {
         name: "department",
         message: "Department for role?",
@@ -258,13 +261,21 @@ async function updateRole() {
       },
     ])
     .then((answers) => {
-      const queryAddRole = "UPDATE role SET  WHERE";
+      const queryUpdateRole = "SELECT * FROM role";
+      //   "UPDATE role SET  WHERE";
       connection.query(
-        queryAddRole,
+        queryUpdateRole,
         [answers.title, answers.salary, answers.department], //no answers.department_id
         (err, res) => {
           if (err) throw err;
-          console.table(res);
+          var roleUpdate = [];
+          for (let i = 0; i < res.length; i++) {
+            roleUpdate.push(res[i].title);
+            //W3 school /nodejs_mysql_update.asp
+            //   var sql = "UPDATE ";
+            //   console.log(result.affectedRows + " record(s) updated");
+            console.table(res);
+          }
         }
       );
     });
