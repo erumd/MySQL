@@ -152,7 +152,13 @@ async function addEmployee() {
         (err, res) => {
           if (err) throw err;
           console.log(answers);
-          console.table(res);
+          //   console.table(res);
+
+          const queryEmployeeTable = "SELECT * FROM employee";
+          connection.query(queryEmployeeTable, (err, res) => {
+            if (err) throw err;
+            console.table(res);
+          });
         }
 
         //take in role_id nad manger_id and output number
