@@ -166,7 +166,7 @@ async function addEmployee() {
     });
 }
 
-// _____________________________________________________________________________________________________
+// ____________________________________________________________________________________________________add department_
 //Will helped
 //trying WITHOUT ASYNCH AND WAIT
 async function addDepartment() {
@@ -199,6 +199,8 @@ async function addDepartment() {
         });
         //   }
         console.table(queryDepartmentTable);
+
+        return whatToDo();
       });
     });
 }
@@ -292,14 +294,19 @@ async function updateRole() {
         [answers.title, answers.salary, answers.department], //no answers.department_id
         (err, res) => {
           if (err) throw err;
-          var roleUpdate = [];
-          for (let i = 0; i < res.length; i++) {
-            roleUpdate.push(res[i].title);
-            //W3 school /nodejs_mysql_update.asp
-            //   var sql = "UPDATE ";
-            //   console.log(result.affectedRows + " record(s) updated");
+          //   var roleUpdate = [];
+          //   for (let i = 0; i < res.length; i++) {
+          //     roleUpdate.push(res[i].title);
+          //W3 school /nodejs_mysql_update.asp
+          //   var sql = "UPDATE ";
+          //   console.log(result.affectedRows + " record(s) updated");
+
+          const queryUpdateRoleTable = "SELECT * FROM role";
+          connection.query(queryUpdateRoleTable, (err, res) => {
+            if (err) throw err;
             console.table(res);
-          }
+          });
+          console.table(res);
         }
       );
     });
