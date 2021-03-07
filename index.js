@@ -241,7 +241,7 @@ async function addRole() {
     if (err) throw err;
     // console.table(res);
 
-    //   add loop
+    //   add loop, not sure if it goes here
     // for (let i = 0; i < res.length; i++) {
     //   inputDepartment.push(res[i].name);
     // }
