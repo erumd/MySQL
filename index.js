@@ -210,6 +210,8 @@ async function addDepartment() {
 // ________________________________________________________________________________________________
 
 async function addRole() {
+  "SELECT * FROM department";
+
   //   const queryAddRole = "SELECT * FROM department";
   //   connection.query(queryAddRole, (err, res) => {
   //     if (err) throw err;
@@ -245,7 +247,7 @@ async function addRole() {
         "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
       connection.query(
         queryAddRole,
-        [answers.title, answers.salary, answers.department_id], //not working [answers.department_id]
+        [answers.title, answers.salary, answers.department_id],
         (err, res) => {
           if (err) throw err;
           //   console.table(res);
