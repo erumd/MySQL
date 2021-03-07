@@ -168,7 +168,9 @@ async function addEmployee() {
           const queryEmployeeTable = "SELECT * FROM employee";
           connection.query(queryEmployeeTable, (err, res) => {
             if (err) throw err;
+            console.log();
             console.table(res);
+            whatToDo();
           });
         }
 
@@ -210,11 +212,12 @@ async function addDepartment() {
           const queryDepartmentTable = "SELECT * FROM department";
           connection.query(queryDepartmentTable, (err, res) => {
             if (err) throw err;
+
             console.table(res);
+            whatToDo();
           });
           //   }
-          console.table(queryDepartmentTable);
-          whatToDo();
+          //   console.table(queryDepartmentTable);
         }
       );
     });
@@ -287,6 +290,7 @@ async function addRole() {
           connection.query(queryRoleTable, (err, res) => {
             if (err) throw err;
             console.table(res);
+            whatToDo();
           });
         }
       );
@@ -348,8 +352,9 @@ async function updateRole() {
           connection.query(queryUpdateRoleTable, (err, res) => {
             if (err) throw err;
             console.table(res);
+            whatToDo();
           });
-          console.table(res);
+          //   console.table(res);
         }
       );
     });
