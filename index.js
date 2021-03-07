@@ -191,26 +191,31 @@ async function addDepartment() {
   await inquirer
     .prompt([
       {
-        name: "department",
+        name: "department_name",
         message: "Which department you want to add?",
         type: "input",
       },
     ])
     .then((answers) => {
-      const queryAddDepartment = "INSERT INTO department (name) VALUES (?)"; //W3 Schools
-      connection.query(queryAddDepartment, [answers.department], (err, res) => {
-        if (err) throw err;
-        // console.table(res);
-
-        // function addDepartmentTable() {
-        const queryDepartmentTable = "SELECT * FROM department";
-        connection.query(queryDepartmentTable, (err, res) => {
+      const queryAddDepartment =
+        "INSERT INTO department (department_name) VALUES (?)"; //W3 Schools
+      connection.query(
+        queryAddDepartment,
+        [answers.department_name],
+        (err, res) => {
           if (err) throw err;
-          console.table(res);
-        });
-        //   }
-        console.table(queryDepartmentTable);
-      });
+          // console.table(res);
+
+          // function addDepartmentTable() {
+          const queryDepartmentTable = "SELECT * FROM department";
+          connection.query(queryDepartmentTable, (err, res) => {
+            if (err) throw err;
+            console.table(res);
+          });
+          //   }
+          console.table(queryDepartmentTable);
+        }
+      );
     });
 }
 
@@ -235,22 +240,22 @@ async function addDepartment() {
 // 4. perform the query to add the new role
 
 async function addRole() {
-  const inputDepartment = [];
-  const queryAddRole = "SELECT * FROM department";
-  connection.query(queryAddRole, (err, res) => {
-    if (err) throw err;
-    // console.table(res);
+  //   const inputDepartment = [];
+  //   const queryAddRole = "SELECT * FROM department";
+  //   connection.query(queryAddRole, (err, res) => {
+  //     if (err) throw err;
+  //     // console.table(res);
 
-    //   add loop, not sure if it goes here
-    // for (let i = 0; i < res.length; i++) {
-    //   inputDepartment.push(res[i].name);
-    // }
-  });
+  //     //   add loop, not sure if it goes here
+  //     for (let i = 0; i < res.length; i++) {
+  //       inputDepartment.push(res[i].name);
+  //     }
+  //   });
 
   await inquirer
     .prompt([
       {
-        name: "title",
+        name: "role_title",
         message: "Which new role do you want to add?",
         type: "input",
       },
@@ -263,16 +268,16 @@ async function addRole() {
         name: "department",
         message: "Department to add new role?",
         type: "list",
-        // choices: ["Human Resources", "Engineering", "Sales"],
-        choices: [inputDepartment],
+        choices: ["Human Resources", "Engineering", "Sales"],
+        // choices: [inputDepartment],
       },
     ])
     .then((answers) => {
       const queryAddRole2 =
-        "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
+        "INSERT INTO role (role_title, salary, department_id) VALUES (?,?,?)";
       connection.query(
         queryAddRole2,
-        [answers.title, answers.salary, answers.department_id],
+        [answers.role_title, answers.salary, answers.department_id],
         (err, res) => {
           if (err) throw err;
           //   console.table(res);
@@ -291,8 +296,18 @@ async function updateRole() {
   await inquirer
     .prompt([
       {
-        name: "title",
-        message: "Name of Role?",
+        name: "first_name",
+        message: "First name of person to update role?",
+        type: "input",
+      },
+      {
+        name: "last_name",
+        message: "Last name of person to update role?",
+        type: "input",
+      },
+      {
+        name: "update_role",
+        message: "Which role to update?",
         type: "list",
         choices: [
           "HR Employee",
@@ -306,19 +321,19 @@ async function updateRole() {
       //     message: "Salary for role selected",
       //     type: "input",
       //   },
-      {
-        name: "department",
-        message: "Department for role?",
-        type: "list",
-        choices: ["Human Resources", "Engineering", "Sales"],
-      },
+      //   { DONT NEED TO CHANGE DEPARTMENT
+      //     name: "department",
+      //     message: "Department for role?",
+      //     type: "list",
+      //     choices: ["Human Resources", "Engineering", "Sales"],
+      //   },
     ])
     .then((answers) => {
-      const queryUpdateRole = "SELECT * FROM role";
+      const queryUpdateRole = "SELECT * FROM employee";
       //   "UPDATE role SET  WHERE";
       connection.query(
         queryUpdateRole,
-        [answers.title, answers.salary, answers.department], //no answers.department_id
+        [answers.first_name, answers.last_name, answers.update_role], //no answers.department_id
         (err, res) => {
           if (err) throw err;
           //   var roleUpdate = [];
@@ -328,7 +343,7 @@ async function updateRole() {
           //   var sql = "UPDATE ";
           //   console.log(result.affectedRows + " record(s) updated");
 
-          const queryUpdateRoleTable = "SELECT * FROM role";
+          const queryUpdateRoleTable = "SELECT * FROM employee";
           connection.query(queryUpdateRoleTable, (err, res) => {
             if (err) throw err;
             console.table(res);
