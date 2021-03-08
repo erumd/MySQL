@@ -1,4 +1,5 @@
 //used SQL activities from class
+// SQL
 //DID study group and got help from Will, Jasmine, amd Gregory
 
 const { questions, department, role, employee } = require("./questions"); //not sure if I did this part right
@@ -272,7 +273,7 @@ async function addRole() {
         type: "input",
       },
       {
-        name: "department",
+        name: "department_name",
         message: "Department to add new role?",
         type: "list",
         choices: ["Human Resources", "Engineering", "Sales"],
@@ -340,8 +341,6 @@ async function updateRole() {
       console.log(answers);
       const queryUpdateRole =
         "UPDATE employee SET role_title=? WHERE first_name=? AND last_name=?";
-      //   "SELECT * FROM employee";
-      //   "UPDATE role SET  WHERE";
       connection.query(
         queryUpdateRole,
         [answers.update_role, answers.first_name, answers.last_name], //no answers.department_id
