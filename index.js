@@ -1,5 +1,5 @@
 //used SQL activities from class
-// SQL
+// SQL: SELECT, INSERT, UPDATE (AND, OR to add 2 conditions. example employee first and last name)
 //DID study group and got help from Will, Jasmine, amd Gregory
 
 const { questions, department, role, employee } = require("./questions"); //not sure if I did this part right
@@ -31,6 +31,7 @@ function whatToDo() {
           "Add Department",
           "Add Employees",
           "Update Role",
+          "Update Manager",
           "Done",
         ],
       },
@@ -42,24 +43,18 @@ function whatToDo() {
         // whatToDo();
       } else if (answers.main === "View All Role") {
         viewRole();
-        // whatToDo();
       } else if (answers.main === "View All Employees") {
         viewEmployee();
-        // whatToDo();
       } else if (answers.main === "Add Employees") {
         addEmployee();
-        // addEmployeeQuestions();
-        // whatToDo(); DONT NEED TO CALL IT AGAIN
       } else if (answers.main === "Add Department") {
         addDepartment();
-        // whatToDo();
       } else if (answers.main === "Add Role") {
         addRole();
-        // inputDepartment();
-        // whatToDo();
       } else if (answers.main === "Update Role") {
         updateRole();
-        // whatToDo();
+      } else if (answers.main === "Update Manager") {
+        updateManager();
       } else if (answers.main === "Done") {
         connection.end();
       }
@@ -101,6 +96,8 @@ function viewEmployee() {
 // const viewEmployee = () => {};
 
 async function addEmployee() {
+  const roles = await db.findAllRoles();
+  const employees = await db.findAllEmployees();
   // const inputDepartment = [];
   // const queryAddEmployee = "SELECT * FROM manager";
   // connection.query(queryAddEmployee, (err, res) => {
@@ -153,6 +150,7 @@ async function addEmployee() {
         ],
       },
     ])
+
     .then((answers) => {
       const queryAddEmployee =
         "INSERT INTO employee (first_name, last_name, role_title, manager_name) VALUES (?,?,?,?)";
@@ -230,22 +228,6 @@ async function addDepartment() {
 //tryin to add query to generate dep table
 
 // ________________________________________________________________________________________________
-// 1. query the db for the departments table (select * )
-
-// 2. In the promise for the query create a new array of objects that have a "name" and "value"
-// New
-
-// the name will be the department name
-
-// value will be the id
-
-// 3. in your followup inquirer questions use that array for the choices on the question for departments
-
-// this will make it so that the choices shown are the department names
-
-// but the actual value is the departments id
-
-// 4. perform the query to add the new role
 
 async function addRole() {
   //   const inputDepartment = [];
@@ -325,17 +307,6 @@ async function updateRole() {
           "Sale Team",
         ],
       },
-      //   { I DON'T THINK NEED TO UPDATE SALARY
-      //     name: "salary",
-      //     message: "Salary for role selected",
-      //     type: "input",
-      //   },
-      //   { DONT NEED TO CHANGE DEPARTMENT
-      //     name: "department",
-      //     message: "Department for role?",
-      //     type: "list",
-      //     choices: ["Human Resources", "Engineering", "Sales"],
-      //   },
     ])
     .then((answers) => {
       console.log(answers);
@@ -359,11 +330,74 @@ async function updateRole() {
             console.table(res);
             whatToDo();
           });
-          //   console.table(res);
         }
       );
     });
 }
+
+// ___________________________________________________________________________ UPDATE MANAGER ROLE
+async function updateManager() {
+  await inquirer
+    .prompt([
+      {
+        name: "first_name",
+        message: "First name of person to update role?",
+        type: "input",
+      },
+      {
+        name: "last_name",
+        message: "Last name of person to update role?",
+        type: "input",
+      },
+      {
+        name: "update_manager_role",
+        message: "Which manager role to update?",
+        type: "list",
+        choices: [
+          "Sponge Bob",
+          "Tom Jerry",
+          "Patrick Star",
+          "Eliza Thornberry",
+        ],
+      },
+    ])
+    .then((answers) => {
+      console.log(answers);
+      const queryUpdateManager =
+        "UPDATE employee SET manager_name=? WHERE first_name=? AND last_name=?";
+      connection.query(
+        queryUpdateManager,
+        [answers.update_manager_role, answers.first_name, answers.last_name], //no answers.department_id
+        (err, res) => {
+          if (err) throw err;
+          //   var roleUpdate = [];
+          //   for (let i = 0; i < res.length; i++) {
+          //     roleUpdate.push(res[i].title);
+          //W3 school /nodejs_mysql_update.asp
+          //   var sql = "UPDATE ";
+          //   console.log(result.affectedRows + " record(s) updated");
+
+          const queryUpdateManagerTable = "SELECT * FROM employee";
+          connection.query(queryUpdateManagerTable, (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            whatToDo();
+          });
+        }
+      );
+    });
+}
+
+// ADD ROLE INSTRUCTION:
+// 1. query the db for the departments table (select * )
+// 2. In the promise for the query create a new array of objects that have a "name" and "value"
+// New
+// the name will be the department name
+// value will be the id
+// 3. in your followup inquirer questions use that array for the choices on the question for departments
+// this will make it so that the choices shown are the department names
+// but the actual value is the departments id
+// 4. perform the query to add the new role
 
 //tried to do switch statement
 // .then((answer) => {
