@@ -14,7 +14,7 @@ CREATE TABLE role  (
     role_title VARCHAR (30),
     salary DECIMAL (10,2),
     department_id INTEGER,
-	department_name VARCHAR (30),
+    department_name VARCHAR (30),
     -- foreign key bc taking in from department table
     foreign key (department_id) references department(id),
     primary key (id)

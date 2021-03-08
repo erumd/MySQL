@@ -74,6 +74,7 @@ function viewDepartment() {
   connection.query(queryDepartment, (err, res) => {
     if (err) throw err;
     console.table(res);
+    whatToDo();
   });
 }
 
@@ -83,6 +84,7 @@ function viewRole() {
   connection.query(queryRole, (err, res) => {
     if (err) throw err;
     console.table(res);
+    whatToDo();
   });
 }
 
@@ -91,6 +93,7 @@ function viewEmployee() {
   connection.query(queryEmployee, (err, res) => {
     if (err) throw err;
     console.table(res);
+    whatToDo();
   });
 }
 
