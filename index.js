@@ -156,23 +156,13 @@ async function addEmployee() {
             whatToDo();
           });
         }
-
-        //take in role_id nad manger_id and output number
       );
     });
 }
 
 // ____________________________________________________________________________________________________add department_
 //Will helped
-//trying WITHOUT ASYNCH AND WAIT
 async function addDepartment() {
-  //   const queryAddDepartment =
-  // "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)"; //W3 Schools
-  //   connection.query(queryAddDepartment, [title, salary, department_id,],(err, res) => {
-  //       if (err) throw err;
-  //       console.table(res);
-  //     }
-  //   );
   await inquirer
     .prompt([
       {
@@ -199,8 +189,6 @@ async function addDepartment() {
             console.table(res);
             whatToDo();
           });
-          //   }
-          //   console.table(queryDepartmentTable);
         }
       );
     });
@@ -211,18 +199,6 @@ async function addDepartment() {
 // ________________________________________________________________________________________________
 
 async function addRole() {
-  //   const inputDepartment = [];
-  //   const queryAddRole = "SELECT * FROM department";
-  //   connection.query(queryAddRole, (err, res) => {
-  //     if (err) throw err;
-  //     // console.table(res);
-
-  //     //   add loop, not sure if it goes here
-  //     for (let i = 0; i < res.length; i++) {
-  //       inputDepartment.push(res[i].name);
-  //     }
-  //   });
-
   await inquirer
     .prompt([
       {
@@ -240,7 +216,6 @@ async function addRole() {
         message: "Department to add new role?",
         type: "list",
         choices: ["Human Resources", "Engineering", "Sales"],
-        // choices: [inputDepartment],
       },
     ])
     .then((answers) => {
@@ -298,13 +273,6 @@ async function updateRole() {
         [answers.update_role, answers.first_name, answers.last_name], //no answers.department_id
         (err, res) => {
           if (err) throw err;
-          //   var roleUpdate = [];
-          //   for (let i = 0; i < res.length; i++) {
-          //     roleUpdate.push(res[i].title);
-          //W3 school /nodejs_mysql_update.asp
-          //   var sql = "UPDATE ";
-          //   console.log(result.affectedRows + " record(s) updated");
-
           const queryUpdateRoleTable = "SELECT * FROM employee";
           connection.query(queryUpdateRoleTable, (err, res) => {
             if (err) throw err;
@@ -351,12 +319,6 @@ async function updateManager() {
         [answers.update_manager_role, answers.first_name, answers.last_name], //no answers.department_id
         (err, res) => {
           if (err) throw err;
-          //   var roleUpdate = [];
-          //   for (let i = 0; i < res.length; i++) {
-          //     roleUpdate.push(res[i].title);
-          //W3 school /nodejs_mysql_update.asp
-          //   var sql = "UPDATE ";
-          //   console.log(result.affectedRows + " record(s) updated");
 
           const queryUpdateManagerTable = "SELECT * FROM employee";
           connection.query(queryUpdateManagerTable, (err, res) => {
@@ -368,6 +330,8 @@ async function updateManager() {
       );
     });
 }
+
+// _______________________________________________________________________________________________HARD WORK BELOW. DID NOT WANT TO DELETE
 
 // ADD ROLE INSTRUCTION:
 // 1. query the db for the departments table (select * )
