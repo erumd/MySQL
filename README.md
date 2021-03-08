@@ -17,17 +17,16 @@ This is a command-line application that allows the user to add departments, role
 ## Installation/Usage
 
 1. After cloning repo to your device in terminal run "npm install"
-2. Open up SQL Workbench and run the bd files schema.sql and seed.sql.
+2. Open up SQL Workbench and run the db files schema.sql and seed.sql.
 3. In .env file set up your connection (database, username, password).
 4. Open terminal and locate the folder
 5. In terminal command line run "node index.js" to start application
 
 https://github.com/erumd/MySQL-Employee-Tracker
 
-Video Walk through:
+Video Walk through: https://video.drift.com/v/abZ2THjeQwq/
 
-![Screenshot](./Assets/note.jpg)
-![Screenshot](Assets/addnote.jpg)
+![Screenshot](./image.jpg)
 
 ## Features
 

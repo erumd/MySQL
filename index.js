@@ -96,25 +96,6 @@ function viewEmployee() {
 // const viewEmployee = () => {};
 
 async function addEmployee() {
-  const roles = await db.findAllRoles();
-  const employees = await db.findAllEmployees();
-  // const inputDepartment = [];
-  // const queryAddEmployee = "SELECT * FROM manager";
-  // connection.query(queryAddEmployee, (err, res) => {
-  //   if (err) throw err;
-  //   // console.table(res);
-
-  //   //   add loop
-  //   for (let i = 0; i < res.length; i++) {
-  //     inputDepartment.push(res[i].name);
-  //   }
-  // });
-  //   const queryAddEmployee = "SELECT * FROM role";
-  //   connection.query(queryAddEmployee, (err, res) => {
-  //     if (err) throw err;
-  //     console.table(res);
-  //   });
-
   await inquirer
     .prompt([
       {
