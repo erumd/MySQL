@@ -337,11 +337,14 @@ async function updateRole() {
       //   },
     ])
     .then((answers) => {
-      const queryUpdateRole = "SELECT * FROM employee";
+      console.log(answers);
+      const queryUpdateRole =
+        "UPDATE employee SET role_title=? WHERE first_name=? AND last_name=?";
+      //   "SELECT * FROM employee";
       //   "UPDATE role SET  WHERE";
       connection.query(
         queryUpdateRole,
-        [answers.first_name, answers.last_name, answers.update_role], //no answers.department_id
+        [answers.update_role, answers.first_name, answers.last_name], //no answers.department_id
         (err, res) => {
           if (err) throw err;
           //   var roleUpdate = [];
