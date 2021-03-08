@@ -1,10 +1,10 @@
-# MySQL
+# MySQL Employee Tracker
 
 Built a solution for managing a company's employees using node, inquirer, and MySQL.
 
 ## Description
 
-This is a command-line application that allows the user to add departments, roles, employees. They can view these departments, roles, and employees employees. Also be able to update employee roles.
+This is a command-line application that allows the user to add departments, roles, employees. They can view these departments, roles, and employees employees. Also be able to update employee role and managers.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ This is a command-line application that allows the user to add departments, role
 
 1. After cloning repo to your device in terminal run "npm install"
 2. Open up SQL Workbench and run the bd files schema.sql and seed.sql.
-3. In .env.EXAMPLE file set up your connection (database, username, password).
+3. In .env file set up your connection (database, username, password).
 4. Open terminal and locate the folder
 5. In terminal command line run "node index.js" to start application
 
