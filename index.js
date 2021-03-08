@@ -130,7 +130,7 @@ async function addEmployee() {
         type: "input",
       },
       {
-        name: "role",
+        name: "role_title",
         message: "Add Employee's role",
         type: "list",
         choices: [
@@ -141,7 +141,7 @@ async function addEmployee() {
         ],
       },
       {
-        name: "manager",
+        name: "manager_name",
         message: "Add Employee's Manager",
         type: "list",
         choices: [
@@ -154,14 +154,14 @@ async function addEmployee() {
     ])
     .then((answers) => {
       const queryAddEmployee =
-        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+        "INSERT INTO employee (first_name, last_name, role_title, manager_name) VALUES (?,?,?,?)";
       connection.query(
         queryAddEmployee,
         [
           answers.first_name,
           answers.last_name,
-          answers.role_id,
-          answers.manager_id,
+          answers.role_title,
+          answers.manager_name,
         ],
         (err, res) => {
           if (err) throw err;
