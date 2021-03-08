@@ -13,10 +13,10 @@ CREATE TABLE role  (
     id INTEGER auto_increment NOT NULL,
     role_title VARCHAR (30),
     salary DECIMAL (10,2),
-    department_id INTEGER,
+    -- department_id INTEGER,
     department_name VARCHAR (30),
     -- foreign key bc taking in from department table
-    foreign key (department_id) references department(id),
+    -- foreign key (department_id) references department(id),
     primary key (id)
 );
 
@@ -29,13 +29,16 @@ primary key (id)
 );
 
 CREATE TABLE employee(
-id INTEGER auto_increment NOT NULL,
+id INTEGER auto_increment NOT NULL, 
 first_name VARCHAR(30), 
 last_name VARCHAR(30),
-role_id  INTEGER, 
+role_id INTEGER, 
+role_title VARCHAR(30),
+manager_title VARCHAR(30),
 manager_id INTEGER,
  -- foreign key bc taking in from role and department table
 foreign key (role_id) REFERENCES role(id),
+-- foreign key (role_title) REFERENCES role(title),
 foreign key (manager_id) references manager (id),
 primary key (id) 
 );

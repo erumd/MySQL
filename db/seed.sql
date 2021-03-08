@@ -19,12 +19,12 @@ VALUES
 ("Eliza", "Thornberry"),
 ("Patrick", "Star");
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, role_title, manager_title, manager_id)
 VALUES
-("Katie", "Goodman", 1,2),
-("Erum", "Dhukka", 2,1),
-("Naureen", "Bilquis", 3,4),
-("Tabish", "Aseem", 4,3);
+("Katie", "Goodman",1, "HR Employee"," Sponge Bob", 2),
+("Erum", "Dhukka", 2, "Back End Develper", "Tom Jerry", 1),
+("Naureen", "Bilquis", 3, "Front End Developer","Patrick Star", 4),
+("Tabish", "Aseem", 4, "Sales Team"," Eliza Thornberry", 3);
 
 
 

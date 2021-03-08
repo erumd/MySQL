@@ -38,13 +38,13 @@ function whatToDo() {
     .then((answers) => {
       if (answers.main === "View All Department") {
         viewDepartment();
-        whatToDo();
+        // whatToDo();
       } else if (answers.main === "View All Role") {
         viewRole();
-        whatToDo();
+        // whatToDo();
       } else if (answers.main === "View All Employees") {
         viewEmployee();
-        whatToDo();
+        // whatToDo();
       } else if (answers.main === "Add Employees") {
         addEmployee();
         // addEmployeeQuestions();
@@ -281,10 +281,10 @@ async function addRole() {
     ])
     .then((answers) => {
       const queryAddRole2 =
-        "INSERT INTO role (role_title, salary, department_id) VALUES (?,?,?)";
+        "INSERT INTO role (role_title, salary, department_name) VALUES (?,?,?)";
       connection.query(
         queryAddRole2,
-        [answers.role_title, answers.salary, answers.department_id],
+        [answers.role_title, answers.salary, answers.department_name],
         (err, res) => {
           if (err) throw err;
           //   console.table(res);
